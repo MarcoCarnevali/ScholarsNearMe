@@ -140,8 +140,21 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
             let jsonObject: [String: AnyObject] = ["uuid": UUID, "name": firstNameTextField.text!, "img": "nothingSoFar", "sms": sms, "whatsapp": whatsapp, "number": phoneNumberTextField.text!]
             
             Alamofire.request(.POST, "http://napolyglot.com:8080/addscholar", parameters: jsonObject)
-
-            //FIXME: set userLoggedIn to true and dismiss login view controller
+                .responseJSON { response in
+                    let error = response.result.error
+                    let json = response.result.value
+                    print("loginResponse: ",json)
+                    
+                    if error != nil{
+                        print("ERROR: ",error)
+                        
+                    }else if json != nil {
+                        
+                        userLoggedin = true
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                    
+            }
             
         } else {
             let alert = UIAlertController(title: "Data not filled!", message:"Ha! Not that quick, fill in your name and phone first!", preferredStyle: .Alert)
