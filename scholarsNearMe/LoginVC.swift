@@ -22,7 +22,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
     var smsSwitch: UISwitch!
     var whatsAppLabel: UILabel!
     var whatsAppSwitch: UISwitch!
-    var loginButton: UIButton!
+    var loginButton: DeformationButton!
     var bounds = UIScreen.mainScreen().bounds
     
     var sms: Bool! = false
@@ -148,19 +148,27 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
                     
                     if error != nil{
                         print("ERROR: ",error)
+                        self.loginButton.stopLoading()
                         
                     }else if json != nil {
-                        
+                        let triggerTime = (Int64(NSEC_PER_SEC) * 4)
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
                         userLoggedin = true
                         self.dismissViewControllerAnimated(true, completion: nil)
+                        })
                     }
                     
             }
             
         } else {
+        
             let alert = UIAlertController(title: "Data not filled!", message:"Ha! Not that quick, fill in your name and phone first!", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
             self.presentViewController(alert, animated: true){}
+           
+               
+            self.loginButton.stopLoading()
+            
         }
     }
     
@@ -274,7 +282,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         whatsAppSwitch.addTarget(self, action: #selector(LoginVC.whatsAppSwitchPressed(_:)), forControlEvents: .ValueChanged)
         self.view.addSubview(whatsAppSwitch)
         
-        loginButton = UIButton(type: UIButtonType.Custom)
+        /*loginButton = UIButton(type: UIButtonType.Custom)
         loginButton.frame = CGRectMake(0, 0, bounds.width-bounds.width/10, 40)
         loginButton.center = CGPoint(x: bounds.width/2, y: bounds.height/20*18.5)
         loginButton.setTitle("Login", forState: .Normal)
@@ -286,7 +294,19 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         loginButton.layer.borderWidth = 0.0
         loginButton.layer.cornerRadius = 0.2 * loginButton.frame.height
         loginButton.layer.masksToBounds = true
+        self.view.addSubview(loginButton)*/
+        
+        loginButton = DeformationButton(frame: CGRectMake(phoneNumberTextField.frame.origin.x,view.frame.size.height-20,bounds.width-bounds.width/10,40), color: UIColor(red: 0.0431, green: 0.1255, blue: 0.2745, alpha: 1.0 ))
+        loginButton.forDisplayButton.setTitle("Login", forState: .Normal)
+        loginButton.forDisplayButton.titleLabel?.font = UIFont(name: "Avenir-Light", size: 20+getFontSizeAdditionWithDeviceType())
+        loginButton.forDisplayButton.setTitleColor(UIColor ( red: 0.8309, green: 0.8526, blue: 0.9116, alpha: 0.8 ), forState: .Normal)
+        loginButton.forDisplayButton.layer.masksToBounds = true
+        loginButton.addTarget(self, action: #selector(LoginVC.loginButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(loginButton)
+        
+        
+        
+        
         
     }
     
