@@ -11,6 +11,7 @@ import Alamofire
 
 class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    
     var addImage: UIButton!
     var firstNameTextFieldLabel: UILabel!
     var firstNameTextField: UITextField!
