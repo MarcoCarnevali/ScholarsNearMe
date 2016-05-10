@@ -12,4 +12,5 @@
 |Niklas Balazs |UI & UX |In Progress|
 |Michael Verges |User Information |In Progress|
 |Maritjn De Vos |Animations |Completed|
+|Marco Carnevali |Home Page |In Progress|
 
