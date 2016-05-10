@@ -12,6 +12,8 @@
 		1271E1D71CDE8E92007C5176 /* DualScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271E1D61CDE8E92007C5176 /* DualScreenVC.swift */; };
 		12E299681CDF4FBE00510861 /* AnimatedProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E299671CDF4FBE00510861 /* AnimatedProfile.swift */; };
 		12E2996A1CDF58B000510861 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E299691CDF58B000510861 /* DataService.swift */; };
+		5CE292351CE2705000E45D30 /* DeformationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE292321CE2705000E45D30 /* DeformationButton.swift */; };
+		5CE292361CE2705000E45D30 /* MozMaterialDesignSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE292341CE2705000E45D30 /* MozMaterialDesignSpinner.swift */; };
 		9F6A58511CDE945000AF3F1E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6A58501CDE945000AF3F1E /* Constants.swift */; };
 		A303FDBB1CE26F0E009FC8A7 /* EffectsAndLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A303FDBA1CE26F0E009FC8A7 /* EffectsAndLayout.swift */; };
 		CF3055801CDEC6CB0059CE75 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30557E1CDEC6CB0059CE75 /* LoginVC.swift */; };
@@ -118,6 +120,8 @@
 		1271E1D61CDE8E92007C5176 /* DualScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DualScreenVC.swift; sourceTree = "<group>"; };
 		12E299671CDF4FBE00510861 /* AnimatedProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedProfile.swift; sourceTree = "<group>"; };
 		12E299691CDF58B000510861 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		5CE292321CE2705000E45D30 /* DeformationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeformationButton.swift; sourceTree = "<group>"; };
+		5CE292341CE2705000E45D30 /* MozMaterialDesignSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MozMaterialDesignSpinner.swift; path = "MozMaterialDesignSpinner-swift/MozMaterialDesignSpinner.swift"; sourceTree = "<group>"; };
 		9F6A58501CDE945000AF3F1E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A303FDBA1CE26F0E009FC8A7 /* EffectsAndLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsAndLayout.swift; sourceTree = "<group>"; };
 		CF30557E1CDEC6CB0059CE75 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -197,6 +201,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		5CE292371CE271FB00E45D30 /* LoadingButton */ = {
+			isa = PBXGroup;
+			children = (
+				5CE292321CE2705000E45D30 /* DeformationButton.swift */,
+				5CE292341CE2705000E45D30 /* MozMaterialDesignSpinner.swift */,
+			);
+			name = LoadingButton;
+			sourceTree = "<group>";
+		};
 		FB0B5EAB1CDE8AAE00993F49 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +218,7 @@
 				FB0B5ED91CDE8AAE00993F49 /* scholarsNearMeUITests */,
 				FB0B5EB51CDE8AAE00993F49 /* Products */,
 				1243CD7E1CDFB41C001ABE21 /* Alamofire.xcodeproj */,
+				5CE292371CE271FB00E45D30 /* LoadingButton */,
 			);
 			sourceTree = "<group>";
 		};
@@ -452,8 +466,10 @@
 				CF3055801CDEC6CB0059CE75 /* LoginVC.swift in Sources */,
 				FB0B5EB81CDE8AAE00993F49 /* AppDelegate.swift in Sources */,
 				1271E1D71CDE8E92007C5176 /* DualScreenVC.swift in Sources */,
+				5CE292361CE2705000E45D30 /* MozMaterialDesignSpinner.swift in Sources */,
 				FB0B5EC01CDE8AAE00993F49 /* scholarsNearMe.xcdatamodeld in Sources */,
 				9F6A58511CDE945000AF3F1E /* Constants.swift in Sources */,
+				5CE292351CE2705000E45D30 /* DeformationButton.swift in Sources */,
 				12E2996A1CDF58B000510861 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
