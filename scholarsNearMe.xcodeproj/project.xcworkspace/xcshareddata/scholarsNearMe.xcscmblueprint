@@ -1,30 +1,30 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "ABEEB113BCA6550DF7AFE121D134A50C4AAE82AA",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "56D645730765FC8190670F9A9786953E0B5CD2AF",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "ABEEB113BCA6550DF7AFE121D134A50C4AAE82AA" : 0,
-    "67620B5EFA902936DF04070AF595B76AB0333747" : 0
+    "67620B5EFA902936DF04070AF595B76AB0333747" : 0,
+    "56D645730765FC8190670F9A9786953E0B5CD2AF" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0C6EB961-093C-4147-851A-A1C73D1426B7",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "ABEEB113BCA6550DF7AFE121D134A50C4AAE82AA" : "scholarsNearMe\/",
-    "67620B5EFA902936DF04070AF595B76AB0333747" : "scholarsNearMe\/Alamofire\/"
+    "67620B5EFA902936DF04070AF595B76AB0333747" : "scholarsNearMe\/Alamofire\/",
+    "56D645730765FC8190670F9A9786953E0B5CD2AF" : "scholarsNearMe\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "scholarsNearMe",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "scholarsNearMe.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eliyazdi\/scholarsNearMe.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "56D645730765FC8190670F9A9786953E0B5CD2AF"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Alamofire\/Alamofire.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "67620B5EFA902936DF04070AF595B76AB0333747"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eliyazdi\/scholarsNearMe.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "ABEEB113BCA6550DF7AFE121D134A50C4AAE82AA"
     }
   ]
 }
