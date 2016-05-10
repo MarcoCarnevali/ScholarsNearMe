@@ -225,7 +225,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         phoneNumberTextField.layer.borderColor = UIColor ( red: 0.8667, green: 0.8667, blue: 0.8667, alpha: 1.0 ).CGColor
         phoneNumberTextField.addTarget(self, action: #selector(LoginVC.editingDidEndphoneNumberTextFieldTextField(_:)), forControlEvents: UIControlEvents.EditingChanged)
         self.view.addSubview(phoneNumberTextField)
-        
+        /*
         forceTouchInformationLabel = UILabel(frame: CGRectMake(0, 0, bounds.width-bounds.width/10, bounds.height/18))
         forceTouchInformationLabel.text = "Creates a 3D Touch shortcut to contact someone nearby"
         forceTouchInformationLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/20*13.5)
@@ -233,7 +233,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         forceTouchInformationLabel.textColor = UIColor ( red: 0.8627, green: 0.8824, blue: 0.9294, alpha: 0.4 )
         forceTouchInformationLabel.textAlignment = .Center
         self.view.addSubview(forceTouchInformationLabel)
-        
+        */
         smsLabel = UILabel(frame: CGRectMake(0, 0, bounds.width/4, bounds.height/18))
         smsLabel.text = "SMS"
         smsLabel.center = CGPoint(x: bounds.width/8*3, y: bounds.height/20*15)
