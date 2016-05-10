@@ -13,7 +13,9 @@ import UIKit
 let screenSize = UIScreen.mainScreen().bounds
 let screenWidth = screenSize.width      //use for device compatibility
 let screenHeight = screenSize.height    //use for device compatibility
-                                        //e.g. CGPointMake(screenWidth*0.1, screenHeight*0.7)
+//e.g. CGPointMake(screenWidth*0.1, screenHeight*0.7)
+
+let userDefaults = NSUserDefaults.standardUserDefaults()
 
 // MARK: User Interface Colors
 let colorMain = UIColor(red:0.32, green:0.65, blue:0.98, alpha:1.0)
@@ -29,6 +31,12 @@ let userPhone = String()
 let userInstagram = String()
 let userFaceBook = String()
 let userSnapchat = String()
+var profilePicture: UIImageView!
+var imagePath: String!
+var firstName: String!
+var phoneNumber: Int!
+var sms: Bool!
+var whatsapp: Bool!
 
 // MARK: Background
 func addBackground(currentViewController: UIViewController, type: String) {
@@ -37,5 +45,59 @@ func addBackground(currentViewController: UIViewController, type: String) {
         background.backgroundColor = colorBackground
     } else if type == "dark" {
         background.backgroundColor = colorDark
+    }
+}
+
+func getFontSizeAdditionWithDeviceType() -> CGFloat {
+    switch screenSize.width {
+    case 320:
+        return 1
+    case 375:
+        return 4
+    case 414:
+        return 5
+    default:
+        return 0
+    }
+}
+
+func getFontSizeAdditioForInformationLabelnWithDeviceType() -> CGFloat {
+    switch screenSize.width {
+    case 320:
+        return 3
+    case 375:
+        return 4
+    case 414:
+        return 5
+    default:
+        return 0
+    }
+}
+
+func documentsDirectory() -> String {
+    let documentsFolderPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
+    return documentsFolderPath
+}
+// File in Documents directory
+func fileInDocumentsDirectory(filename: String) -> String {
+    return documentsDirectory().stringByAppendingPathComponent(filename)
+}
+
+func saveImage(image: UIImage, path: String) -> Bool {
+    let pngImageData = UIImagePNGRepresentation(image)
+    let result = pngImageData!.writeToFile(path, atomically: true)
+    return result
+}
+
+func loadImageFromPath(path: String) -> UIImage? {
+    let data = NSData(contentsOfFile: path)
+    let image = UIImage(data: data!)
+    return image
+}
+
+extension String {
+    func stringByAppendingPathComponent(path: String) -> String {
+        let nsSt = self as NSString
+        return nsSt.stringByAppendingPathComponent(path)
     }
 }

@@ -14,7 +14,7 @@ class AnimatedProfilePicture: UIView
     var profileImageView: UIImageView?
     var baseView: UIView?
     var timer: NSTimer?
-    var circlesToSpawn = 7
+    var circlesToSpawn = 1000
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -28,11 +28,14 @@ class AnimatedProfilePicture: UIView
         super.init(frame: frame)
         
         createProfilePicture()
+        print("createProfilePicture")
+        self.center = CGPoint(x: screenWidth/2, y: screenHeight/5)
+        
     }
     
     func startAnimating(delay: CGFloat)
     {
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(createCircle), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: #selector(createCircle), userInfo: nil, repeats: true)
     }
     
     func setProfilePicture(image: UIImage)
@@ -45,6 +48,7 @@ class AnimatedProfilePicture: UIView
         profileImageView = UIImageView(frame: CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
         profileImageView?.layer.cornerRadius = self.frame.size.width / 2
         profileImageView?.clipsToBounds = true
+        profileImageView?.contentMode = .ScaleAspectFill
         
         profileImageView?.layer.shadowColor = UIColor.blackColor().CGColor
         profileImageView?.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -78,11 +82,12 @@ class AnimatedProfilePicture: UIView
         circleView.backgroundColor = UIColor.whiteColor()
         circleView.layer.cornerRadius = circleView.frame.width / 2
         circleView.layer.masksToBounds = true
+        circleView.layer.opacity = 0.3
         
         self.insertSubview(circleView, belowSubview: baseView!)
         
-        UIView.animateWithDuration(1.5, delay: 0, options: .CurveEaseOut, animations: {
-            circleView.transform = CGAffineTransformMakeScale(2, 2)
+        UIView.animateWithDuration(3.5, delay: 0, options: .CurveEaseOut, animations: {
+            circleView.transform = CGAffineTransformMakeScale(3, 3)
             circleView.alpha = 0.0
             }, completion: { (b: Bool) in
                 circleView.removeFromSuperview()

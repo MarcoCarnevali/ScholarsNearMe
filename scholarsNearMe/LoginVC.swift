@@ -3,14 +3,13 @@
 //  scholarsNearMe
 //
 //  Created by Niklas Balazs on 07/05/16.
-//  Copyright © 2016 Eli Yazdi. All rights reserved.
+//  Copyright © 2016 Niklas Balazs. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 
 class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
     
     var addImage: UIButton!
     var firstNameTextFieldLabel: UILabel!
@@ -25,11 +24,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
     var loginButton: UIButton!
     var bounds = UIScreen.mainScreen().bounds
     
-    var sms: Bool! = false
-    var whatsapp: Bool! = false
-    
-    var firstName: String!
-    var phoneNumber: String!
+    var wrongPhoneNumber = false
     
     var UUID: String!
     
@@ -37,59 +32,32 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         self.view.endEditing(true)
     }
     
-    func getFontSizeAdditionWithDeviceType() -> CGFloat {
-        switch bounds.width {
-        case 320:
-            return 1
-        case 375:
-            return 4
-        case 414:
-            return 5
-        default:
-            return 0
-        }
-    }
-    
-    func getFontSizeAdditioForInformationLabelnWithDeviceType() -> CGFloat {
-        switch bounds.width {
-        case 320:
-            return 3
-        case 375:
-            return 4
-        case 414:
-            return 5
-        default:
-            return 0
-        }
-    }
-    
-    
-    func addImagePressed(sender: UIButton!) {
-        let message = "Add a profile picture from the library or take a new picture"
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .ActionSheet)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        alert.addAction(cancelAction)
-        
-        let cameraAction = UIAlertAction(title: "Take photo", style: .Default, handler: { _ in
-            let imagePickerController = UIImagePickerController()
-            imagePickerController.delegate = self
-            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-            self.presentViewController(imagePickerController, animated: true, completion: nil)
-        })
-        alert.addAction(cameraAction)
-        
-        let libraryAction = UIAlertAction(title: "Photo library", style: .Default, handler: { _ in
-            let imagePickerController = UIImagePickerController()
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
+        let imagePickerController = UIImagePickerController()
+        switch buttonIndex{
+        case 0:
             imagePickerController.delegate = self
             imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             self.presentViewController(imagePickerController, animated: true, completion: nil)
-        })
-        alert.addAction(libraryAction)
+        case 1:
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+            self.presentViewController(imagePickerController, animated: true, completion: nil)
+        default:
+            print("Error")
+        }
         
-        presentViewController(alert, animated: true, completion: nil)
     }
-
+    
+    func addImagePressed(sender: UIButton!) {
+        var alert = UIAlertView()
+        alert.delegate = self
+        alert.message = "Add a profile picture from the library or take a new picture"
+        alert.addButtonWithTitle("Photo library")
+        alert.addButtonWithTitle("Take photo")
+        alert.title = "Add a profile picture"
+        alert.show()
+    }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let theInfo = info as NSDictionary
@@ -97,6 +65,8 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         let myencodedImage = NSKeyedArchiver.archivedDataWithRootObject(img)
         DataService.ds.setObject(value: myencodedImage, forKey: "Profile-Image")
         addImage.setImage(img, forState: .Normal)
+        profilePicture = UIImageView()
+        profilePicture.image = img
         addImage.contentMode = UIViewContentMode.ScaleAspectFill
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -105,63 +75,110 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         firstName = firstNameTextField.text
     }
     
-    func editingDidEndphoneNumberTextFieldTextField(sender: UITextField!) {
-        phoneNumber = phoneNumberTextField.text
+    func editingDidBeginPhoneNumberTextFieldTextField(sender: UITextField!) {
+        phoneNumber = Int(phoneNumberTextField.text!)
+    }
+    
+    func editingDidEndPhoneNumberTextFieldTextField(sender: UITextField!) {
+        if phoneNumberTextField.text?.substringFromIndex((phoneNumberTextField.text?.startIndex)!) == "+" {
+            phoneNumberTextField.text?.removeAtIndex((phoneNumberTextField.text?.startIndex)!)
+        }
+        if let number = Int((phoneNumberTextField.text)!) {
+            phoneNumber = number
+        } else {
+            phoneNumber = nil
+            let alertTwo = UIAlertView()
+            alertTwo.message = "Change the number in order to create an account"
+            alertTwo.addButtonWithTitle("Ok")
+            alertTwo.title = "Not a valid number"
+            alertTwo.show()
+            self.view.endEditing(true)
+        }
+        if let phoneNumberCopy = phoneNumber {
+            print(phoneNumberCopy)
+        }
     }
     
     func smsSwitchPressed(sender: UISwitch!) {
         if smsSwitch.on {
-          sms = true
+            sms = true
         } else {
-          sms = false
+            sms = false
         }
     }
     
     func whatsAppSwitchPressed(sender: UISwitch!) {
         if whatsAppSwitch.on {
-          whatsapp = true
+            sms = true
         } else {
-          whatsapp = false
-  
+            sms = false
+            
         }
     }
     
     func loginButtonPressed(sender: UIButton!) {
-        if firstName != nil && phoneNumber != nil {
-            loginButton.backgroundColor = UIColor ( red: 0.0706, green: 0.1569, blue: 0.3098, alpha: 1.0 )
-            //self.presentViewController(nextViewController, animated: true, completion: nil)
-            // Save UUID in NSUserDefaults
-            if UUID == nil {
-                //FIXME: you can't set a nil value for a key in a NSUserDefault
-//                UUID = NSUUID().UUIDString
-                DataService.ds.setValue(value: UUID, forKey: "UUID-Key")
-            }
-            
-            // Add user to the DB
-            let jsonObject: [String: AnyObject] = ["uuid": UUID, "name": firstNameTextField.text!, "img": "nothingSoFar", "sms": sms, "whatsapp": whatsapp, "number": phoneNumberTextField.text!]
-            
-            Alamofire.request(.POST, "http://napolyglot.com:8080/addscholar", parameters: jsonObject)
-                .responseJSON { response in
-                    let error = response.result.error
-                    let json = response.result.value
-                    print("loginResponse: ",json)
-                    
-                    if error != nil{
-                        print("ERROR: ",error)
-                        
-                    }else if json != nil {
-                        
-                        userLoggedin = true
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    }
-                    
-            }
-            
-        } else {
-            let alert = UIAlertController(title: "Data not filled!", message:"Ha! Not that quick, fill in your name and phone first!", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
-            self.presentViewController(alert, animated: true){}
+        if phoneNumberTextField.text?.substringFromIndex((phoneNumberTextField.text?.startIndex)!) == "+" {
+            phoneNumberTextField.text?.removeAtIndex((phoneNumberTextField.text?.startIndex)!)
         }
+        if let number = Int((phoneNumberTextField.text)!) {
+            phoneNumber = number
+            wrongPhoneNumber = false
+        } else {
+            phoneNumber = nil
+            wrongPhoneNumber = true
+        }
+        if firstName != nil && phoneNumber != nil && profilePicture != nil {
+            var storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            var vc = storyboard.instantiateViewControllerWithIdentifier("MainScreen") as! MainScreen
+            loginButton.backgroundColor = UIColor ( red: 0.0706, green: 0.1569, blue: 0.3098, alpha: 1.0 )
+            /*
+             // Save UUID in NSUserDefaults
+             if let uuid = UUID {
+             DataService.ds.setValue(value: uuid, forKey: "UUID-Key")
+             }
+             
+             // Add user to the DB
+             print(UUID)
+             let jsonObject: [String: AnyObject] = ["uuid": UUID, "name": firstNameTextField.text!, "img": "nothingSoFar", "sms": sms, "whatsapp": whatsapp, "number": phoneNumber]
+             
+             Alamofire.request(.POST, "http://napolyglot.com:8080/addscholar", parameters: jsonObject)
+             */
+            imagePath = fileInDocumentsDirectory("profilePicture.png")
+            
+            if profilePicture.image != nil {
+                // Save it to our Documents folder
+                let result = saveImage(profilePicture.image!, path: imagePath)
+                print("Image saved? Result: (result)")
+                
+                // Load image from our Documents folder
+                var loadedImage = loadImageFromPath(imagePath)
+                if loadedImage != nil {
+                    print("Image loaded: (loadedImage!)")
+                    profilePicture.image = loadedImage
+                }
+            }
+            
+            userLoggedin = true
+            
+            userDefaults.setObject(firstName, forKey: "firstName")
+            userDefaults.setObject(phoneNumber, forKey: "phoneNumber")
+            userDefaults.setObject(sms, forKey: "sms")
+            userDefaults.setObject(whatsapp, forKey: "whatsapp")
+            userDefaults.setObject(imagePath, forKey: "imagePath")
+            userDefaults.setBool(userLoggedin, forKey: "userLoggedIn")
+            userDefaults.synchronize()
+            
+            self.presentViewController(vc, animated: true, completion: nil)
+            
+        } else if wrongPhoneNumber {
+            let alertTwo = UIAlertView()
+            alertTwo.message = "Change the number in order to create an account"
+            alertTwo.addButtonWithTitle("Ok")
+            alertTwo.title = "Not a valid number"
+            alertTwo.show()
+            self.view.endEditing(true)
+        }
+        
     }
     
     
@@ -171,7 +188,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         super.viewDidLoad()
         
         
-        if let _ = DataService.ds.valueForKey("UUID-Key") as? String {
+        if let h = DataService.ds.valueForKey("UUID-Key") as? String {
             
         } else {
             UUID = NSUUID().UUIDString
@@ -230,14 +247,15 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         phoneNumberTextField.textColor = UIColor ( red: 0.8627, green: 0.8824, blue: 0.9294, alpha: 1.0 )
         phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
         phoneNumberTextField.autocorrectionType = UITextAutocorrectionType.No
-        phoneNumberTextField.keyboardType = UIKeyboardType.PhonePad
+        phoneNumberTextField.keyboardType = UIKeyboardType.Default
         phoneNumberTextField.returnKeyType = UIReturnKeyType.Done
         phoneNumberTextField.clearButtonMode = UITextFieldViewMode.WhileEditing;
         phoneNumberTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
         phoneNumberTextField.layer.borderColor = UIColor ( red: 0.8667, green: 0.8667, blue: 0.8667, alpha: 1.0 ).CGColor
-        phoneNumberTextField.addTarget(self, action: #selector(LoginVC.editingDidEndphoneNumberTextFieldTextField(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        phoneNumberTextField.addTarget(self, action: #selector(LoginVC.editingDidBeginPhoneNumberTextFieldTextField(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        phoneNumberTextField.addTarget(self, action: #selector(LoginVC.editingDidEndPhoneNumberTextFieldTextField(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
         self.view.addSubview(phoneNumberTextField)
-        /*
+        
         forceTouchInformationLabel = UILabel(frame: CGRectMake(0, 0, bounds.width-bounds.width/10, bounds.height/18))
         forceTouchInformationLabel.text = "Creates a 3D Touch shortcut to contact someone nearby"
         forceTouchInformationLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/20*13.5)
@@ -245,7 +263,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         forceTouchInformationLabel.textColor = UIColor ( red: 0.8627, green: 0.8824, blue: 0.9294, alpha: 0.4 )
         forceTouchInformationLabel.textAlignment = .Center
         self.view.addSubview(forceTouchInformationLabel)
-        */
+        
         smsLabel = UILabel(frame: CGRectMake(0, 0, bounds.width/4, bounds.height/18))
         smsLabel.text = "SMS"
         smsLabel.center = CGPoint(x: bounds.width/8*3, y: bounds.height/20*15)

@@ -24,6 +24,6 @@ class DataService {
         NSUserDefaults.standardUserDefaults().setObject(value, forKey: forKey)
     }
     
-
+    
     
 }
