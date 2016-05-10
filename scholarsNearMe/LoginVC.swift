@@ -157,7 +157,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         super.viewDidLoad()
         
         
-        if let h = DataService.ds.valueForKey("UUID-Key") as? String {
+        if let _ = DataService.ds.valueForKey("UUID-Key") as? String {
             
         } else {
             UUID = NSUUID().UUIDString
