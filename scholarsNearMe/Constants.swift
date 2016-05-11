@@ -89,10 +89,22 @@ func saveImage(image: UIImage, path: String) -> Bool {
     return result
 }
 
+var image: UIImage!
+
 func loadImageFromPath(path: String) -> UIImage? {
-    let data = NSData(contentsOfFile: path)
-    let image = UIImage(data: data!)
+    
+    if let optionalData = NSData(contentsOfFile: path) {
+        let data = optionalData
+        if let optionalImage = UIImage(data: data) {
+            image = optionalImage
+        }
+    }
+    
     return image
+    
+//    let data = NSData(contentsOfFile: path)
+//    let image = UIImage(data: data!)
+//    return image
 }
 
 extension String {
