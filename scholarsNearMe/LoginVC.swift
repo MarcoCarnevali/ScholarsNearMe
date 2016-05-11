@@ -286,7 +286,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         forceTouchInformationLabel.font = UIFont(name: "Avenir-Light", size: 7+getFontSizeAdditioForInformationLabelnWithDeviceType())
         forceTouchInformationLabel.textColor = UIColor ( red: 0.8627, green: 0.8824, blue: 0.9294, alpha: 0.4 )
         forceTouchInformationLabel.textAlignment = .Center
-        self.view.addSubview(forceTouchInformationLabel)
+//        self.view.addSubview(forceTouchInformationLabel)
         
         smsLabel = UILabel(frame: CGRectMake(0, 0, bounds.width/4, bounds.height/18))
         smsLabel.text = "SMS"
