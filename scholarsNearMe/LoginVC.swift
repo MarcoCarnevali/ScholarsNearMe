@@ -21,7 +21,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
     var smsSwitch: UISwitch!
     var whatsAppLabel: UILabel!
     var whatsAppSwitch: UISwitch!
-    var loginButton: UIButton!
+    var loginButton: DeformationButton!
     var bounds = UIScreen.mainScreen().bounds
     
     var wrongPhoneNumber = false
@@ -131,18 +131,42 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
             var storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             var vc = storyboard.instantiateViewControllerWithIdentifier("MainScreen") as! MainScreen
             loginButton.backgroundColor = UIColor ( red: 0.0706, green: 0.1569, blue: 0.3098, alpha: 1.0 )
-            /*
-             // Save UUID in NSUserDefaults
+                         // Save UUID in NSUserDefaults
              if let uuid = UUID {
              DataService.ds.setValue(value: uuid, forKey: "UUID-Key")
              }
              
              // Add user to the DB
              print(UUID)
+ 
              let jsonObject: [String: AnyObject] = ["uuid": UUID, "name": firstNameTextField.text!, "img": "nothingSoFar", "sms": sms, "whatsapp": whatsapp, "number": phoneNumber]
              
              Alamofire.request(.POST, "http://napolyglot.com:8080/addscholar", parameters: jsonObject)
-             */
+                .responseJSON { response in
+                    let error = response.result.error
+                    let json = response.result.value
+                    print("Login response: ",json)
+                    
+                    if error != nil{
+                        
+                        
+                    }else if json != nil {
+                    
+                       userLoggedin = true
+                        let triggerTime = (Int64(NSEC_PER_SEC) * 4)
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                            self.loginButton.stopLoading()
+                        })
+                    }
+                    
+            }
+        
+            
+            
+            
+            
+            
             imagePath = fileInDocumentsDirectory("profilePicture.png")
             
             if profilePicture.image != nil {
@@ -158,7 +182,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
                 }
             }
             
-            userLoggedin = true
+        
             
             userDefaults.setObject(firstName, forKey: "firstName")
             userDefaults.setObject(phoneNumber, forKey: "phoneNumber")
@@ -171,6 +195,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
             self.presentViewController(vc, animated: true, completion: nil)
             
         } else if wrongPhoneNumber {
+            self.loginButton.stopLoading()
             let alertTwo = UIAlertView()
             alertTwo.message = "Change the number in order to create an account"
             alertTwo.addButtonWithTitle("Ok")
@@ -292,18 +317,16 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         whatsAppSwitch.addTarget(self, action: #selector(LoginVC.whatsAppSwitchPressed(_:)), forControlEvents: .ValueChanged)
         self.view.addSubview(whatsAppSwitch)
         
-        loginButton = UIButton(type: UIButtonType.Custom)
-        loginButton.frame = CGRectMake(0, 0, bounds.width-bounds.width/10, 40)
-        loginButton.center = CGPoint(x: bounds.width/2, y: bounds.height/20*18.5)
-        loginButton.setTitle("Login", forState: .Normal)
+        loginButton = DeformationButton(frame: CGRectMake(firstNameTextField.frame.origin.x, view.frame.height-20, bounds.width-bounds.width/10, 40), color: UIColor ( red: 0.0431, green: 0.1255, blue: 0.2745, alpha: 1.0 ))
+
+        loginButton.forDisplayButton.setTitle("Login", forState: .Normal)
         loginButton.addTarget(self, action: #selector(LoginVC.loginButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         loginButton.backgroundColor = UIColor ( red: 0.0431, green: 0.1255, blue: 0.2745, alpha: 1.0 )
-        loginButton.titleLabel?.font = UIFont(name: "Avenir-Light", size: 20+getFontSizeAdditionWithDeviceType())
-        loginButton.setTitleColor(UIColor ( red: 0.8309, green: 0.8526, blue: 0.9116, alpha: 0.8 ), forState: .Normal)
-        loginButton.layer.borderColor = UIColor ( red: 0.8542, green: 0.8541, blue: 0.8541, alpha: 0.6 ).CGColor
-        loginButton.layer.borderWidth = 0.0
-        loginButton.layer.cornerRadius = 0.2 * loginButton.frame.height
-        loginButton.layer.masksToBounds = true
+        loginButton.forDisplayButton.titleLabel?.font = UIFont(name: "Avenir-Light", size: 20+getFontSizeAdditionWithDeviceType())
+        loginButton.forDisplayButton.setTitleColor(UIColor ( red: 0.8309, green: 0.8526, blue: 0.9116, alpha: 0.8 ), forState: .Normal)
+   
+        loginButton.addTarget(self, action: #selector(LoginVC.loginButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        
         self.view.addSubview(loginButton)
         
     }
