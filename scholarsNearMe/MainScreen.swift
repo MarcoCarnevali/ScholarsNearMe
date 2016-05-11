@@ -51,7 +51,7 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
         self.view.sendSubviewToBack(background)
         // Do any additional setup after loading the view, typically from a nib.
         print("MainScreen")
-        userLoggedin = userDefaults.boolForKey("userLoggedIn")
+        userLoggedin = userDefaults.boolForKey("logged")
         if userLoggedin == true {
             print("userLoggedIn")
             
@@ -138,12 +138,12 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
     
     
     override func viewDidAppear(animated: Bool) {
-        if userDefaults.boolForKey("userLoggedIn") == false {
+        print(userDefaults.boolForKey("logged"))
+        if userDefaults.boolForKey("logged") == false {
             print("userRegister")
             let newViewController = LoginVC(nibName: "LoginVC", bundle: nil)
             self.presentViewController(newViewController, animated: true, completion: nil)
-            userDefaults.setBool(true, forKey: "userLoggedIn")
-            userDefaults.synchronize()
+        
         } else {
             print("User already registered")
             // imagePath = userDefaults.objectForKey("imagePath") as! String
