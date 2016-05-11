@@ -69,18 +69,18 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
 //                
 //            }
             
-            print(userDefaults.objectForKey("imagePath"))
-            
-            if let optionalImagePath = userDefaults.objectForKey("imagePath") as? String {
-                let imagePath = optionalImagePath as! String
-                if let loadedImage = loadImageFromPath(imagePath) {
-                    animatedProfilePicture.setProfilePicture(loadedImage)
-                    self.view.addSubview(animatedProfilePicture)
-                    delay(1.0) {
-                        self.animatedProfilePicture.startAnimating(0)
-                    }
-                }
-            }
+//            print(userDefaults.objectForKey("imagePath"))
+//            
+//            if let optionalImagePath = userDefaults.objectForKey("imagePath") as? String {
+//                let imagePath = optionalImagePath as! String
+//                if let loadedImage = loadImageFromPath(imagePath) {
+//                    animatedProfilePicture.setProfilePicture(loadedImage)
+//                    self.view.addSubview(animatedProfilePicture)
+//                    delay(1.0) {
+//                        self.animatedProfilePicture.startAnimating(0)
+//                    }
+//                }
+//            }
             
 //            if let loadedImage = loadImageFromPath(imagePath) {
 //                animatedProfilePicture.setProfilePicture(loadedImage)
@@ -165,11 +165,25 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
             self.presentViewController(newViewController, animated: true, completion: nil)
             userDefaults.setBool(true, forKey: "userLoggedIn")
             userDefaults.synchronize()
-        } else {
-            print("User already registered")
+        } else if userDefaults.boolForKey("userLoggedIn"){
+            print("User already registered Appeared!")
             // imagePath = userDefaults.objectForKey("imagePath") as! String
             // print(imagePath)
+            print(userDefaults.objectForKey("imagePath"))
             
+            if let optionalImagePath = userDefaults.objectForKey("imagePath") as? String {
+                let imagePath = optionalImagePath as! String
+                if let loadedImage = loadImageFromPath(imagePath) {
+                    animatedProfilePicture.setProfilePicture(loadedImage)
+                    self.view.addSubview(animatedProfilePicture)
+                    delay(1.0) {
+                        self.animatedProfilePicture.startAnimating(0)
+                    }
+                }
+            }
+            
+        } else {
+            print("Major login error!!")
         }
         
         
