@@ -317,7 +317,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         whatsAppSwitch.addTarget(self, action: #selector(LoginVC.whatsAppSwitchPressed(_:)), forControlEvents: .ValueChanged)
         self.view.addSubview(whatsAppSwitch)
         
-        loginButton = DeformationButton(frame: CGRectMake(firstNameTextField.frame.origin.x, view.frame.height-20, bounds.width-bounds.width/10, 40), color: UIColor ( red: 0.0431, green: 0.1255, blue: 0.2745, alpha: 1.0 ))
+        loginButton = DeformationButton(frame: CGRectMake(firstNameTextField.frame.origin.x, UIScreen.mainScreen().bounds.height-60, bounds.width-bounds.width/10, 40), color: UIColor ( red: 0.0431, green: 0.1255, blue: 0.2745, alpha: 1.0 ))
 
         loginButton.forDisplayButton.setTitle("Login", forState: .Normal)
         loginButton.addTarget(self, action: #selector(LoginVC.loginButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
