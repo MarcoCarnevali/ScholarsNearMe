@@ -170,20 +170,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
             
             
             
-            imagePath = fileInDocumentsDirectory("profilePicture.png")
-            
-            if profilePicture.image != nil {
-                // Save it to our Documents folder
-                let result = saveImage(profilePicture.image!, path: imagePath)
-                print("Image saved? Result: (result)")
-                
-                // Load image from our Documents folder
-                var loadedImage = loadImageFromPath(imagePath)
-                if loadedImage != nil {
-                    print("Image loaded: (loadedImage!)")
-                    profilePicture.image = loadedImage
-                }
-            }
+            imageData = UIImagePNGRepresentation(profilePicture.image!)!
             
             
             
@@ -191,7 +178,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
             userDefaults.setObject(phoneNumber, forKey: "phoneNumber")
             userDefaults.setObject(sms, forKey: "sms")
             userDefaults.setObject(whatsapp, forKey: "whatsapp")
-            userDefaults.setObject(imagePath, forKey: "imagePath")
+            userDefaults.setObject(imageData, forKey: "profilePictureData")
             userDefaults.synchronize()
             
             

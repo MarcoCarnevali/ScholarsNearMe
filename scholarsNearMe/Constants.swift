@@ -32,7 +32,7 @@ let userInstagram = String()
 let userFaceBook = String()
 let userSnapchat = String()
 var profilePicture: UIImageView!
-var imagePath: String!
+var imageData = NSData()
 var firstName: String!
 var phoneNumber: Int!
 var sms: Bool! = false

@@ -171,12 +171,15 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
             // imagePath = userDefaults.objectForKey("imagePath") as! String
             // print(imagePath)
             print(userDefaults.objectForKey("imagePath"))
-            
-            if let optionalImagePath = userDefaults.objectForKey("imagePath") as? String {
-                let imagePath = optionalImagePath
-                if let loadedImage = loadImageFromPath(imagePath) {
+                imageData = userDefaults.objectForKey("profilePictureData") as! NSData
+                if let loadedImage = UIImage(data: imageData) {
                     if userDefaults.boolForKey("afterRegistration") {
-                        
+                        animatedProfilePicture.setProfilePicture(loadedImage)
+                        // /Users/niklasbalazs/Library/Developer/CoreSimulator/Devices/84388A5E-AF41-4354-9DC1-93380B4BF0FE/data/Containers/Data/Application/94A94A22-0D0D-4AFB-889F-714736BBAF2F/Documents/profilePicture.png
+                        // /Users/niklasbalazs/Library/Developer/CoreSimulator/Devices/84388A5E-AF41-4354-9DC1-93380B4BF0FE/data/Containers/Data/Application/94A94A22-0D0D-4AFB-889F-714736BBAF2F/Documents/profilePicture.png
+                        self.view.addSubview(self.animatedProfilePicture)
+                        self.animatedProfilePicture.startAnimating(0)
+                        userDefaults.setBool(true, forKey: "afterRegistration")
                     } else {
                         imageViewForAnimationAfterRegistration = UIImageView(frame: CGRectMake(0, 0, screenWidth/2, screenWidth/2))
                         imageViewForAnimationAfterRegistration.center = CGPoint(x: screenWidth/2, y: screenHeight/5)
@@ -206,7 +209,6 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
                         userDefaults.setBool(true, forKey: "afterRegistration")
                     }
                 }
-            }
             
         } else {
             print("Major login error!!")
