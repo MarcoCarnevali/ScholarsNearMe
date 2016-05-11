@@ -35,8 +35,8 @@ var profilePicture: UIImageView!
 var imagePath: String!
 var firstName: String!
 var phoneNumber: Int!
-var sms: Bool!
-var whatsapp: Bool!
+var sms: Bool! = false
+var whatsapp: Bool! = false
 
 // MARK: Background
 func addBackground(currentViewController: UIViewController, type: String) {

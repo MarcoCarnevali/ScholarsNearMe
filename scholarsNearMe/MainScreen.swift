@@ -55,19 +55,40 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
         if userLoggedin == true {
             print("userLoggedIn")
             
-            if let loadedImage = UIImage(named: "step1") {
-                print(" Loaded Image: \(loadedImage)")
-                animatedProfilePicture.setProfilePicture(loadedImage)
-                self.view.addSubview(animatedProfilePicture)
-                // /Users/niklasbalazs/Library/Developer/CoreSimulator/Devices/84388A5E-AF41-4354-9DC1-93380B4BF0FE/data/Containers/Data/Application/94A94A22-0D0D-4AFB-889F-714736BBAF2F/Documents/profilePicture.png
-                // /Users/niklasbalazs/Library/Developer/CoreSimulator/Devices/84388A5E-AF41-4354-9DC1-93380B4BF0FE/data/Containers/Data/Application/94A94A22-0D0D-4AFB-889F-714736BBAF2F/Documents/profilePicture.png
-                moveObject(animatedProfilePicture, toX: 0, toY: screenHeight/20*11.5, duration: 1, delay: 1)
-                // scaleView(animatedProfilePicture, scaleX: 2, scaleY: 2, duration: 1, delay: 1) // Not working as excpected
-                delay(1.0) {
-                    self.animatedProfilePicture.startAnimating(0)
+//            if let loadedImage = UIImage(named: "step1") {
+//                print(" Loaded Image: \(loadedImage)")
+//                animatedProfilePicture.setProfilePicture(loadedImage)
+//                self.view.addSubview(animatedProfilePicture)
+//                // /Users/niklasbalazs/Library/Developer/CoreSimulator/Devices/84388A5E-AF41-4354-9DC1-93380B4BF0FE/data/Containers/Data/Application/94A94A22-0D0D-4AFB-889F-714736BBAF2F/Documents/profilePicture.png
+//                // /Users/niklasbalazs/Library/Developer/CoreSimulator/Devices/84388A5E-AF41-4354-9DC1-93380B4BF0FE/data/Containers/Data/Application/94A94A22-0D0D-4AFB-889F-714736BBAF2F/Documents/profilePicture.png
+//                moveObject(animatedProfilePicture, toX: 0, toY: screenHeight/20*11.5, duration: 1, delay: 1)
+//                // scaleView(animatedProfilePicture, scaleX: 2, scaleY: 2, duration: 1, delay: 1) // Not working as excpected
+//                delay(1.0) {
+//                    self.animatedProfilePicture.startAnimating(0)
+//                }
+//                
+//            }
+            
+            print(userDefaults.objectForKey("imagePath"))
+            
+            if let optionalImagePath = userDefaults.objectForKey("imagePath") as? String {
+                let imagePath = optionalImagePath as! String
+                if let loadedImage = loadImageFromPath(imagePath) {
+                    animatedProfilePicture.setProfilePicture(loadedImage)
+                    self.view.addSubview(animatedProfilePicture)
+                    delay(1.0) {
+                        self.animatedProfilePicture.startAnimating(0)
+                    }
                 }
-                
             }
+            
+//            if let loadedImage = loadImageFromPath(imagePath) {
+//                animatedProfilePicture.setProfilePicture(loadedImage)
+//                self.view.addSubview(animatedProfilePicture)
+//                delay(1.0) {
+//                    self.animatedProfilePicture.startAnimating(0)
+//                }
+//            }
             
         } else {
             print("Error")

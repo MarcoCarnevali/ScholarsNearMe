@@ -108,9 +108,9 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
     
     func whatsAppSwitchPressed(sender: UISwitch!) {
         if whatsAppSwitch.on {
-            sms = true
+            whatsapp = true
         } else {
-            sms = false
+            whatsapp = false
             
         }
     }
@@ -150,6 +150,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
                         
                         
                     }else if json != nil {
+                        print(json)
                     
                        userLoggedin = true
                         let triggerTime = (Int64(NSEC_PER_SEC) * 4)
