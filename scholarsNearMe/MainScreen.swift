@@ -20,7 +20,7 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
     var peripheralManager: CBPeripheralManager!
     
     var UUID: NSUUID?
-    var animatedProfilePicture = AnimatedProfilePicture(frame: CGRectMake(0, 100, 200, 200))
+    var animatedProfilePicture = AnimatedProfilePicture(frame: CGRectMake(0, 0, 200, 200))
     
     func moveObject(object: AnyObject, toX: CGFloat, toY: CGFloat, duration: CFTimeInterval, delay: CFTimeInterval) {
         CATransaction.begin()
