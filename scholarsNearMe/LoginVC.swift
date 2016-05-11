@@ -213,7 +213,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         super.viewDidLoad()
         
         
-        if let h = DataService.ds.valueForKey("UUID-Key") as? String {
+        if let _ = DataService.ds.valueForKey("UUID-Key") as? String {
             
         } else {
             UUID = NSUUID().UUIDString
@@ -272,7 +272,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         phoneNumberTextField.textColor = UIColor ( red: 0.8627, green: 0.8824, blue: 0.9294, alpha: 1.0 )
         phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
         phoneNumberTextField.autocorrectionType = UITextAutocorrectionType.No
-        phoneNumberTextField.keyboardType = UIKeyboardType.Default
+        phoneNumberTextField.keyboardType = UIKeyboardType.PhonePad
         phoneNumberTextField.returnKeyType = UIReturnKeyType.Done
         phoneNumberTextField.clearButtonMode = UITextFieldViewMode.WhileEditing;
         phoneNumberTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
