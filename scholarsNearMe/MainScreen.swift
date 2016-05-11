@@ -20,7 +20,8 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
     var peripheralManager: CBPeripheralManager!
     
     var UUID: NSUUID?
-    var animatedProfilePicture = AnimatedProfilePicture(frame: CGRectMake(0, 0, 200, 200))
+    var imageViewForAnimationAfterRegistration: UIImageView!
+    var animatedProfilePicture = AnimatedProfilePicture(frame: CGRectMake(0, 0, screenWidth/2*1.1, screenWidth/2*1.1))
     
     func moveObject(object: AnyObject, toX: CGFloat, toY: CGFloat, duration: CFTimeInterval, delay: CFTimeInterval) {
         CATransaction.begin()
@@ -37,6 +38,7 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
         animation.beginTime = currentLayerTime + delay
         animation.removedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
         object.layer.addAnimation(animation, forKey: "move")
         
@@ -172,12 +174,37 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
             print(userDefaults.objectForKey("imagePath"))
             
             if let optionalImagePath = userDefaults.objectForKey("imagePath") as? String {
-                let imagePath = optionalImagePath as! String
+                let imagePath = optionalImagePath
                 if let loadedImage = loadImageFromPath(imagePath) {
-                    animatedProfilePicture.setProfilePicture(loadedImage)
-                    self.view.addSubview(animatedProfilePicture)
-                    delay(1.0) {
-                        self.animatedProfilePicture.startAnimating(0)
+                    if userDefaults.boolForKey("afterRegistration") {
+                        
+                    } else {
+                        imageViewForAnimationAfterRegistration = UIImageView(frame: CGRectMake(0, 0, screenWidth/2, screenWidth/2))
+                        imageViewForAnimationAfterRegistration.center = CGPoint(x: screenWidth/2, y: screenHeight/5)
+                        imageViewForAnimationAfterRegistration.image = loadedImage
+                        imageViewForAnimationAfterRegistration.layer.cornerRadius = imageViewForAnimationAfterRegistration.frame.width / 2
+                        imageViewForAnimationAfterRegistration.clipsToBounds = true
+                        imageViewForAnimationAfterRegistration.contentMode = .ScaleAspectFill
+                        imageViewForAnimationAfterRegistration.layer.shadowColor = UIColor.blackColor().CGColor
+                        imageViewForAnimationAfterRegistration.layer.shadowOffset = CGSize(width: 3, height: 3)
+                        imageViewForAnimationAfterRegistration.layer.shadowOpacity = 0.7
+                        imageViewForAnimationAfterRegistration.layer.shadowRadius = 4.0
+                        
+                        delay(1) {
+                            self.moveObject(self.imageViewForAnimationAfterRegistration, toX: 0, toY: screenHeight/20*14, duration: 0.8, delay: 0)
+                            scaleView(self.imageViewForAnimationAfterRegistration, scaleX: 1.1, scaleY: 1.1, duration: 0.8, delay: 0)
+                        }
+                        self.view.addSubview(imageViewForAnimationAfterRegistration)
+                        
+                        animatedProfilePicture.setProfilePicture(loadedImage)
+                        // /Users/niklasbalazs/Library/Developer/CoreSimulator/Devices/84388A5E-AF41-4354-9DC1-93380B4BF0FE/data/Containers/Data/Application/94A94A22-0D0D-4AFB-889F-714736BBAF2F/Documents/profilePicture.png
+                        // /Users/niklasbalazs/Library/Developer/CoreSimulator/Devices/84388A5E-AF41-4354-9DC1-93380B4BF0FE/data/Containers/Data/Application/94A94A22-0D0D-4AFB-889F-714736BBAF2F/Documents/profilePicture.png
+                        delay(2.0) {
+                            self.view.addSubview(self.animatedProfilePicture)
+                            self.view.willRemoveSubview(self.imageViewForAnimationAfterRegistration)
+                            self.animatedProfilePicture.startAnimating(0)
+                        }
+                        userDefaults.setBool(true, forKey: "afterRegistration")
                     }
                 }
             }

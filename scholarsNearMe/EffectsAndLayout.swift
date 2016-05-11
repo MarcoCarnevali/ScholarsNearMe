@@ -23,9 +23,8 @@ func fadeOutView(view: UIView, duration: NSTimeInterval, delay: NSTimeInterval) 
 func scaleView(view: UIView, scaleX: CGFloat, scaleY: CGFloat, duration: NSTimeInterval, delay: NSTimeInterval) {
     UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseOut, animations: {
         view.transform = CGAffineTransformMakeScale(scaleX, scaleY)
-        view.alpha = 0.0
+        view.alpha = 1.0
         }, completion: { (b: Bool) in
-            view.removeFromSuperview()
     })
 }
 

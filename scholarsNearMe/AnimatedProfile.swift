@@ -30,7 +30,7 @@ class AnimatedProfilePicture: UIView
         
         createProfilePicture()
         print("createProfilePicture")
-        self.center = CGPoint(x: screenWidth/2, y: screenHeight/5)
+        self.center = CGPoint(x: screenWidth/2, y: screenHeight/20*18)
         
     }
     
