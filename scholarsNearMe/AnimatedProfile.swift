@@ -79,7 +79,7 @@ class AnimatedProfilePicture: UIView
     
     func createCircle()
     {
-        let circleView = UIView(frame: CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
+        let circleView = UIView(frame: CGRectMake(0, 100, self.frame.size.width, self.frame.size.height))
         circleView.backgroundColor = UIColor.whiteColor()
         circleView.layer.cornerRadius = circleView.frame.width / 2
         circleView.layer.masksToBounds = true
