@@ -32,31 +32,30 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         self.view.endEditing(true)
     }
     
-    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
-        let imagePickerController = UIImagePickerController()
-        switch buttonIndex{
-        case 0:
-            imagePickerController.delegate = self
-            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            self.presentViewController(imagePickerController, animated: true, completion: nil)
-        case 1:
+    func addImagePressed(sender: UIButton!) {
+        let message = "Add a profile picture from the library or take a new picture"
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        let cameraAction = UIAlertAction(title: "Take photo", style: .Default, handler: { _ in
+            let imagePickerController = UIImagePickerController()
             imagePickerController.delegate = self
             imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
             self.presentViewController(imagePickerController, animated: true, completion: nil)
-        default:
-            print("Error")
-        }
+        })
+        alert.addAction(cameraAction)
         
-    }
-    
-    func addImagePressed(sender: UIButton!) {
-        var alert = UIAlertView()
-        alert.delegate = self
-        alert.message = "Add a profile picture from the library or take a new picture"
-        alert.addButtonWithTitle("Photo library")
-        alert.addButtonWithTitle("Take photo")
-        alert.title = "Add a profile picture"
-        alert.show()
+        let libraryAction = UIAlertAction(title: "Photo library", style: .Default, handler: { _ in
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(imagePickerController, animated: true, completion: nil)
+        })
+        alert.addAction(libraryAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -147,14 +146,18 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
                     let error = response.result.error
                     let json = response.result.value
                     print("Login response: ",json)
+                    print("Login error: ",error)
                     
                     if error != nil{
                         self.loginButton.stopLoading()
                         print("SERVER ERROR")
                     }else if json != nil {
-                    
+
                         userDefaults.setObject(true, forKey: "logged")
                         userDefaults.synchronize()
+
+                        userLoggedin = true
+
                         let triggerTime = (Int64(NSEC_PER_SEC) * 4)
                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
                         self.dismissViewControllerAnimated(true, completion: nil)
@@ -212,8 +215,13 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if userDefaults.boolForKey("userLoggedIn") == true {
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            print("Not logged in, loaded login VC")
+        }
         
-        if let h = DataService.ds.valueForKey("UUID-Key") as? String {
+        if let _ = DataService.ds.valueForKey("UUID-Key") as? String {
             
         } else {
             UUID = NSUUID().UUIDString
@@ -272,7 +280,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         phoneNumberTextField.textColor = UIColor ( red: 0.8627, green: 0.8824, blue: 0.9294, alpha: 1.0 )
         phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
         phoneNumberTextField.autocorrectionType = UITextAutocorrectionType.No
-        phoneNumberTextField.keyboardType = UIKeyboardType.Default
+        phoneNumberTextField.keyboardType = UIKeyboardType.PhonePad
         phoneNumberTextField.returnKeyType = UIReturnKeyType.Done
         phoneNumberTextField.clearButtonMode = UITextFieldViewMode.WhileEditing;
         phoneNumberTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
@@ -287,7 +295,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         forceTouchInformationLabel.font = UIFont(name: "Avenir-Light", size: 7+getFontSizeAdditioForInformationLabelnWithDeviceType())
         forceTouchInformationLabel.textColor = UIColor ( red: 0.8627, green: 0.8824, blue: 0.9294, alpha: 0.4 )
         forceTouchInformationLabel.textAlignment = .Center
-        self.view.addSubview(forceTouchInformationLabel)
+//        self.view.addSubview(forceTouchInformationLabel)
         
         smsLabel = UILabel(frame: CGRectMake(0, 0, bounds.width/4, bounds.height/18))
         smsLabel.text = "SMS"

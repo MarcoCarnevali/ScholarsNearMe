@@ -14,6 +14,12 @@
 		12E2996A1CDF58B000510861 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E299691CDF58B000510861 /* DataService.swift */; };
 		5CE292351CE2705000E45D30 /* DeformationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE292321CE2705000E45D30 /* DeformationButton.swift */; };
 		5CE292361CE2705000E45D30 /* MozMaterialDesignSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE292341CE2705000E45D30 /* MozMaterialDesignSpinner.swift */; };
+		5CE2927A1CE3A59600E45D30 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CE292791CE3A59600E45D30 /* Info.plist */; };
+		7D270F741CE36F9B00B3F584 /* PersonEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D270F721CE36F9B00B3F584 /* PersonEntity+CoreDataProperties.swift */; };
+		7D270F751CE36F9B00B3F584 /* PersonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D270F731CE36F9B00B3F584 /* PersonEntity.swift */; };
+		7D270F7D1CE36FAE00B3F584 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D270F7C1CE36FAE00B3F584 /* Person.swift */; };
+		7D270F7F1CE375BD00B3F584 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D270F7E1CE375BD00B3F584 /* DataModel.swift */; };
+		7D270F811CE375E000B3F584 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D270F801CE375E000B3F584 /* CoreDataStack.swift */; };
 		9F6A58511CDE945000AF3F1E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6A58501CDE945000AF3F1E /* Constants.swift */; };
 		A3099C5D1CE3658D008B6923 /* EffectsAndLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3099C5C1CE3658D008B6923 /* EffectsAndLayout.swift */; };
 		CF3055801CDEC6CB0059CE75 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30557E1CDEC6CB0059CE75 /* LoginVC.swift */; };
@@ -122,6 +128,12 @@
 		12E299691CDF58B000510861 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		5CE292321CE2705000E45D30 /* DeformationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeformationButton.swift; sourceTree = "<group>"; };
 		5CE292341CE2705000E45D30 /* MozMaterialDesignSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MozMaterialDesignSpinner.swift; path = "MozMaterialDesignSpinner-swift/MozMaterialDesignSpinner.swift"; sourceTree = "<group>"; };
+		5CE292791CE3A59600E45D30 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D270F721CE36F9B00B3F584 /* PersonEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D270F731CE36F9B00B3F584 /* PersonEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonEntity.swift; sourceTree = "<group>"; };
+		7D270F7C1CE36FAE00B3F584 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		7D270F7E1CE375BD00B3F584 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		7D270F801CE375E000B3F584 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9F6A58501CDE945000AF3F1E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A3099C5C1CE3658D008B6923 /* EffectsAndLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsAndLayout.swift; sourceTree = "<group>"; };
 		CF30557E1CDEC6CB0059CE75 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -133,7 +145,6 @@
 		FB0B5EBF1CDE8AAE00993F49 /* scholarsNearMe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = scholarsNearMe.xcdatamodel; sourceTree = "<group>"; };
 		FB0B5EC11CDE8AAE00993F49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB0B5EC41CDE8AAE00993F49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FB0B5EC61CDE8AAE00993F49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB0B5ECB1CDE8AAE00993F49 /* scholarsNearMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = scholarsNearMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB0B5ECF1CDE8AAE00993F49 /* scholarsNearMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scholarsNearMeTests.swift; sourceTree = "<group>"; };
 		FB0B5ED11CDE8AAE00993F49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -197,6 +208,11 @@
 		1271E1D01CDE8D97007C5176 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7D270F721CE36F9B00B3F584 /* PersonEntity+CoreDataProperties.swift */,
+				7D270F731CE36F9B00B3F584 /* PersonEntity.swift */,
+				7D270F7C1CE36FAE00B3F584 /* Person.swift */,
+				7D270F7E1CE375BD00B3F584 /* DataModel.swift */,
+				7D270F801CE375E000B3F584 /* CoreDataStack.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -244,8 +260,8 @@
 				CF30557F1CDEC6CB0059CE75 /* LoginVC.xib */,
 				FB0B5EBB1CDE8AAE00993F49 /* Main.storyboard */,
 				FB0B5EC11CDE8AAE00993F49 /* Assets.xcassets */,
-				FB0B5EC61CDE8AAE00993F49 /* Info.plist */,
 				FB0B5EBE1CDE8AAE00993F49 /* scholarsNearMe.xcdatamodeld */,
+				5CE292791CE3A59600E45D30 /* Info.plist */,
 			);
 			path = scholarsNearMe;
 			sourceTree = "<group>";
@@ -432,6 +448,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE2927A1CE3A59600E45D30 /* Info.plist in Resources */,
 				CF3055811CDEC6CB0059CE75 /* LoginVC.xib in Resources */,
 				FB0B5EC51CDE8AAE00993F49 /* LaunchScreen.storyboard in Resources */,
 				FB0B5EC21CDE8AAE00993F49 /* Assets.xcassets in Resources */,
@@ -461,8 +478,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				12E299681CDF4FBE00510861 /* AnimatedProfile.swift in Sources */,
+				7D270F751CE36F9B00B3F584 /* PersonEntity.swift in Sources */,
 				A3099C5D1CE3658D008B6923 /* EffectsAndLayout.swift in Sources */,
 				FB0B5EBA1CDE8AAE00993F49 /* MainScreen.swift in Sources */,
+				7D270F7D1CE36FAE00B3F584 /* Person.swift in Sources */,
+				7D270F811CE375E000B3F584 /* CoreDataStack.swift in Sources */,
+				7D270F7F1CE375BD00B3F584 /* DataModel.swift in Sources */,
+				7D270F741CE36F9B00B3F584 /* PersonEntity+CoreDataProperties.swift in Sources */,
 				CF3055801CDEC6CB0059CE75 /* LoginVC.swift in Sources */,
 				FB0B5EB81CDE8AAE00993F49 /* AppDelegate.swift in Sources */,
 				1271E1D71CDE8E92007C5176 /* DualScreenVC.swift in Sources */,
