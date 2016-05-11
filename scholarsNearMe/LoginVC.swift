@@ -126,18 +126,19 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
             phoneNumber = nil
             wrongPhoneNumber = true
         }
+       
         if firstName != nil && phoneNumber != nil && profilePicture != nil {
-            var storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            var vc = storyboard.instantiateViewControllerWithIdentifier("MainScreen") as! MainScreen
             loginButton.backgroundColor = UIColor ( red: 0.0706, green: 0.1569, blue: 0.3098, alpha: 1.0 )
                          // Save UUID in NSUserDefaults
+            UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
              if let uuid = UUID {
              DataService.ds.setValue(value: uuid, forKey: "UUID-Key")
              }
              
              // Add user to the DB
              print(UUID)
- 
+            print("CIAO")
+
              let jsonObject: [String: AnyObject] = ["uuid": UUID, "name": firstNameTextField.text!, "img": "nothingSoFar", "sms": sms, "whatsapp": whatsapp, "number": phoneNumber]
              
              Alamofire.request(.POST, "http://napolyglot.com:8080/addscholar", parameters: jsonObject)
@@ -148,10 +149,15 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
                     print("Login error: ",error)
                     
                     if error != nil{
-                        
-                        
+                        self.loginButton.stopLoading()
+                        print("SERVER ERROR")
                     }else if json != nil {
+
+                        userDefaults.setObject(true, forKey: "logged")
+                        userDefaults.synchronize()
+
                         userLoggedin = true
+
                         let triggerTime = (Int64(NSEC_PER_SEC) * 4)
                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
                         self.dismissViewControllerAnimated(true, completion: nil)
@@ -188,10 +194,8 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
             userDefaults.setObject(sms, forKey: "sms")
             userDefaults.setObject(whatsapp, forKey: "whatsapp")
             userDefaults.setObject(imagePath, forKey: "imagePath")
-            userDefaults.setBool(userLoggedin, forKey: "userLoggedIn")
             userDefaults.synchronize()
             
-            self.presentViewController(vc, animated: true, completion: nil)
             
         } else if wrongPhoneNumber {
             self.loginButton.stopLoading()
