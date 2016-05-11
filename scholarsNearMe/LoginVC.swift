@@ -32,31 +32,30 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         self.view.endEditing(true)
     }
     
-    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
-        let imagePickerController = UIImagePickerController()
-        switch buttonIndex{
-        case 0:
-            imagePickerController.delegate = self
-            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            self.presentViewController(imagePickerController, animated: true, completion: nil)
-        case 1:
+    func addImagePressed(sender: UIButton!) {
+        let message = "Add a profile picture from the library or take a new picture"
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        let cameraAction = UIAlertAction(title: "Take photo", style: .Default, handler: { _ in
+            let imagePickerController = UIImagePickerController()
             imagePickerController.delegate = self
             imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
             self.presentViewController(imagePickerController, animated: true, completion: nil)
-        default:
-            print("Error")
-        }
+        })
+        alert.addAction(cameraAction)
         
-    }
-    
-    func addImagePressed(sender: UIButton!) {
-        var alert = UIAlertView()
-        alert.delegate = self
-        alert.message = "Add a profile picture from the library or take a new picture"
-        alert.addButtonWithTitle("Photo library")
-        alert.addButtonWithTitle("Take photo")
-        alert.title = "Add a profile picture"
-        alert.show()
+        let libraryAction = UIAlertAction(title: "Photo library", style: .Default, handler: { _ in
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(imagePickerController, animated: true, completion: nil)
+        })
+        alert.addAction(libraryAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
