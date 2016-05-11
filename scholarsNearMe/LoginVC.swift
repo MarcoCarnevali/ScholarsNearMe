@@ -213,7 +213,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if userDefaults.boolForKey("userLoggedIn") == true {
+        if userDefaults.boolForKey("logged") == true {
             dismissViewControllerAnimated(true, completion: nil)
         } else {
             print("Not logged in, loaded login VC")

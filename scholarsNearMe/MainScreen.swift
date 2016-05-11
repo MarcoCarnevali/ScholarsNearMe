@@ -165,7 +165,6 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
             print("userRegister")
             let newViewController = LoginVC(nibName: "LoginVC", bundle: nil)
             self.presentViewController(newViewController, animated: true, completion: nil)
-            userDefaults.setBool(true, forKey: "logged")
             userDefaults.synchronize()
         } else if userDefaults.boolForKey("logged"){
             print("User already registered Appeared!")
