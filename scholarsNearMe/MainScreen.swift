@@ -30,6 +30,7 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
     var localBeacon: CLBeaconRegion!
     var beaconPeripheralData: NSDictionary!
     var peripheralManager: CBPeripheralManager!
+    var beaconRegion: CLBeaconRegion!
     
     var UUID: NSUUID?
     var imageViewForAnimationAfterRegistration: UIImageView!
@@ -107,6 +108,8 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
             //                }
             //            }
             
+            startMonitoring()
+            
         } else {
             print("Error")
         }
@@ -152,10 +155,21 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
         let localBeaconMinor: CLBeaconMinorValue = 456
         
         let uuid = NSUUID(UUIDString: String(localBeaconUUID))!
-        localBeacon = CLBeaconRegion(proximityUUID: uuid, major: localBeaconMajor, minor: localBeaconMinor, identifier: "Your private identifer here")
+        localBeacon = CLBeaconRegion(proximityUUID: uuid, major: localBeaconMajor, minor: localBeaconMinor, identifier: "scholarNearMeBeacon")
         
         beaconPeripheralData = localBeacon.peripheralDataWithMeasuredPower(nil)
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
+        beaconRegion = CLBeaconRegion()
+    }
+    
+    func startMonitoring() {
+        locationManager.startMonitoringForRegion(beaconRegion)
+        locationManager.startRangingBeaconsInRegion(beaconRegion)
+    }
+    
+    func stopMonitoring() {
+        locationManager.stopMonitoringForRegion(beaconRegion)
+        locationManager.stopRangingBeaconsInRegion(beaconRegion)
     }
     
     func stopLocalBeacon() {
