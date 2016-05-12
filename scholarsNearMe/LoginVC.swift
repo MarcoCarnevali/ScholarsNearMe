@@ -88,7 +88,7 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
             imageData = UIImagePNGRepresentation(profilePicture.image!)!
             
             let imageText : String = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
-            let jsonObject: [String: AnyObject] = ["uuid": UUID, "name": firstNameTextField.text!, "img": "nothing", "number" : "number", "whatsapp" : "0", "sms" : "0"]
+            let jsonObject: [String: AnyObject] = ["uuid": UUID, "name": firstNameTextField.text!, "img": imageText]
             
             Alamofire.request(.POST, "http://napolyglot.com:8080/addscholar", parameters: jsonObject)
                 .responseJSON { response in

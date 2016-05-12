@@ -115,7 +115,7 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
         for beacon in beacons {
             
             
-            Alamofire.request(.GET, "http://napolyglot.com:8080/getscholar", parameters: ["uuid": beacon.proximityUUID])
+            Alamofire.request(.POST, "http://napolyglot.com:8080/getscholar", parameters: ["uuid": beacon.proximityUUID])
                 .responseJSON { response in
                     
                     if let JSON = response.result.value {
