@@ -13,6 +13,18 @@ import Alamofire
 
 class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManagerDelegate {
     
+    
+    @IBOutlet weak var selfProfileImage: AnimatedProfilePicture!
+    
+    @IBOutlet weak var profileImageContainer1: UIImageView!
+    @IBOutlet weak var profileImageContainer2: UIImageView!
+    @IBOutlet weak var profileImageContainer3: UIImageView!
+    @IBOutlet weak var profileImageContainer4: UIImageView!
+    @IBOutlet weak var profileImageContainer5: UIImageView!
+    var arrayImageContainers = [UIImageView]()
+    
+    var peopleFound = [Person]() // ARRAY OF PEOPLE FOUND. PUT PERSON OBJECT INSIDE AND CALL refreshFaces TO CHANGE IMAGES IN IMAGEVIEW
+    
     let locationManager = CLLocationManager()
     
     var localBeacon: CLBeaconRegion!
@@ -52,6 +64,9 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
         self.view.addSubview(background)
         self.view.sendSubviewToBack(background)
         // Do any additional setup after loading the view, typically from a nib.
+        // Config images 
+        arrayImageContainers = [profileImageContainer1, profileImageContainer2, profileImageContainer3, profileImageContainer4, profileImageContainer5]
+        makeFacesImageViewContainerRounds()
         print("MainScreen")
         userLoggedin = userDefaults.boolForKey("logged")
         if userLoggedin == true {
@@ -229,6 +244,73 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
     
 }
 
+extension MainScreen {
+    //MARK: Faces Zone 
+    private func makeFacesImageViewContainerRounds() {
+        for imageView in arrayImageContainers {
+            imageView.layer.cornerRadius = imageView.bounds.height / 2
+            imageView.clipsToBounds = true
+            
+            imageView.alpha = 0
+        }
+    }
+    
+    private func refreshFaces() {
+        guard !peopleFound.isEmpty else { return }
+        // Lots boring stuff, lets go in a background task 
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            // Shuffle ^^
+            self.arrayImageContainers.randomShuffle()
+            self.peopleFound.randomShuffle()
+            
+            // we need an array of max (arrayImageContainers.count) items of lucky people to show
+            var luckyPeople = [Person]()
+            
+            if self.peopleFound.count >= 5 {
+                luckyPeople = [self.peopleFound[0],self.peopleFound[1],self.peopleFound[2],self.peopleFound[3],self.peopleFound[4]]
+            } else {
+                luckyPeople = self.peopleFound
+            }
+            
+            for (index , person) in luckyPeople.enumerate() {
+                let imageView = self.arrayImageContainers[index]
+                
+                // Hide the image view
+                self.imageViewShouldAppear(false, imageView: imageView)
+                // Update the image view
+                imageView.image = person.image
+                // Show the image View
+                self.imageViewShouldAppear(true, imageView: imageView)
+            }
 
+        }
+    }
+    
+    
+    
+    private func imageViewShouldAppear(appear: Bool, imageView: UIImageView) {
+        let alpha = CGFloat(appear ? 1 : 0)
+        dispatch_async(dispatch_get_main_queue()) {
+            // Update the UI in main thread 
+            UIView.animateWithDuration(0.5) {
+                imageView.alpha = alpha
+            }
+        }
+    }
+}
 
+extension MutableCollectionType where Index == Int {
+
+    mutating func randomShuffle() {
+        
+        if count < 2 { return }
+        
+        for i in 0..<count - 1 {
+            let j = Int(arc4random_uniform(UInt32(count - i))) + i
+            guard i != j else { continue }
+            swap(&self[i], &self[j])
+        }
+    }
+}
 

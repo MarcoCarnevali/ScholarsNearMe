@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F31a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Main Screen-->
@@ -16,8 +19,75 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kS8-nv-q1O" customClass="AnimatedProfilePicture" customModule="scholarsNearMe" customModuleProvider="target">
+                                <rect key="frame" x="150" y="325" width="300" height="300"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="kS8-nv-q1O" secondAttribute="height" multiplier="1:1" id="v47-n1-4ia"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="js3-pC-JYy">
+                                <rect key="frame" x="225" y="125" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="js3-pC-JYy" secondAttribute="height" multiplier="1:1" id="Rra-kT-Q70"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vmc-MU-MnH">
+                                <rect key="frame" x="55" y="-75" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Vmc-MU-MnH" secondAttribute="height" multiplier="1:1" id="JT0-Wp-fKt"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r0v-E3-nbd">
+                                <rect key="frame" x="395" y="-75" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="r0v-E3-nbd" secondAttribute="height" multiplier="1:1" id="gGk-ad-2JR"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rq4-UL-H68">
+                                <rect key="frame" x="440" y="145" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rq4-UL-H68" secondAttribute="height" multiplier="1:1" id="Arn-LI-vDw"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WaX-Jz-x1k">
+                                <rect key="frame" x="20" y="145" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="WaX-Jz-x1k" secondAttribute="height" multiplier="1:1" id="dd1-3w-llY"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Vmc-MU-MnH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="35" id="79s-U6-X9W"/>
+                            <constraint firstItem="js3-pC-JYy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C0A-Kb-UC8"/>
+                            <constraint firstItem="js3-pC-JYy" firstAttribute="top" secondItem="r0v-E3-nbd" secondAttribute="bottom" constant="50" id="E8h-hv-7CB"/>
+                            <constraint firstItem="js3-pC-JYy" firstAttribute="top" secondItem="Vmc-MU-MnH" secondAttribute="bottom" constant="50" id="GAw-L4-7QI"/>
+                            <constraint firstItem="kS8-nv-q1O" firstAttribute="top" secondItem="js3-pC-JYy" secondAttribute="bottom" constant="50" id="JxE-gM-laC"/>
+                            <constraint firstItem="kS8-nv-q1O" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="LDR-24-G4o"/>
+                            <constraint firstItem="WaX-Jz-x1k" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="LNg-Tf-QEq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rq4-UL-H68" secondAttribute="trailing" constant="-10" id="QHl-DB-bhW"/>
+                            <constraint firstItem="Vmc-MU-MnH" firstAttribute="height" secondItem="js3-pC-JYy" secondAttribute="height" id="SwY-J8-nNk"/>
+                            <constraint firstItem="kS8-nv-q1O" firstAttribute="top" secondItem="WaX-Jz-x1k" secondAttribute="bottom" constant="30" id="TrR-8k-hj1"/>
+                            <constraint firstItem="js3-pC-JYy" firstAttribute="height" secondItem="kS8-nv-q1O" secondAttribute="height" multiplier="0.5" id="UdV-2b-Jfr"/>
+                            <constraint firstItem="r0v-E3-nbd" firstAttribute="height" secondItem="js3-pC-JYy" secondAttribute="height" id="kSh-VU-Oce"/>
+                            <constraint firstItem="rq4-UL-H68" firstAttribute="height" secondItem="js3-pC-JYy" secondAttribute="height" id="mdz-wk-W7m"/>
+                            <constraint firstItem="kS8-nv-q1O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pAQ-JL-Jge"/>
+                            <constraint firstItem="kS8-nv-q1O" firstAttribute="top" secondItem="rq4-UL-H68" secondAttribute="bottom" constant="30" id="vbJ-at-eQ8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="r0v-E3-nbd" secondAttribute="trailing" constant="35" id="yeU-8m-BPG"/>
+                            <constraint firstItem="WaX-Jz-x1k" firstAttribute="height" secondItem="js3-pC-JYy" secondAttribute="height" id="ynI-8g-1MF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kS8-nv-q1O" secondAttribute="bottom" constant="-25" id="z80-83-jqf"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="profileImageContainer1" destination="Vmc-MU-MnH" id="mHu-od-qqM"/>
+                        <outlet property="profileImageContainer2" destination="r0v-E3-nbd" id="91Y-Wp-xIB"/>
+                        <outlet property="profileImageContainer3" destination="WaX-Jz-x1k" id="UBR-vB-iNf"/>
+                        <outlet property="profileImageContainer4" destination="js3-pC-JYy" id="SJ9-lI-pgn"/>
+                        <outlet property="profileImageContainer5" destination="rq4-UL-H68" id="oau-pi-I2h"/>
+                        <outlet property="selfProfileImage" destination="kS8-nv-q1O" id="VQl-QJ-pgC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
