@@ -100,7 +100,12 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
                     if error != nil{
                         self.loginButton.stopLoading()
                         print("SERVER ERROR")
-                    }else if json != nil {
+                        let alert = UIAlertView()
+                        alert.addButtonWithTitle("Ok")
+                        alert.title = "Connection error"
+                        alert.message = "Your are not connected to the internet. Check your network settings."
+                        alert.show()
+                    } else if json != nil {
                         
                         userDefaults.setObject(true, forKey: "logged")
                         userDefaults.synchronize()
@@ -113,19 +118,12 @@ class LoginVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
                     }
                     
             }
-            
-            
-            
-            
-            
-            
 
-            
             userDefaults.setObject(firstName, forKey: "firstName")
             userDefaults.setObject(imageData, forKey: "profilePictureData")
             userDefaults.synchronize()
             
-            
+           
         }
         
     }

@@ -35,9 +35,6 @@ class DataModel {
             
             // Update managed Object values. Not update UUID...Not needed
             managedObject.setValue(person.name, forKey: "name")
-            managedObject.setValue(person.phoneNumber, forKey: "phoneNumber")
-            managedObject.setValue(person.whatsappFlag, forKey: "whatsappFlag")
-            managedObject.setValue(person.smsFlag, forKey: "smsFlag")
             
             if let image = person.image {
                 let data = UIImagePNGRepresentation(image)

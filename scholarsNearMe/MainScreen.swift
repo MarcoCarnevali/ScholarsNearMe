@@ -71,7 +71,6 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
         print("MainScreen")
         userLoggedin = userDefaults.boolForKey("logged")
         if userLoggedin == true {
-            print("userLoggedIn")
             
             //            if let loadedImage = UIImage(named: "step1") {
             //                print(" Loaded Image: \(loadedImage)")
@@ -139,6 +138,8 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
                     if let JSON = response.result.value {
                         print("JSON: \(JSON)")
                     }
+                    
+                    self.refreshFaces()
             }
         }
         
@@ -195,7 +196,7 @@ class MainScreen: UIViewController, CBPeripheralManagerDelegate, CLLocationManag
             let newViewController = LoginVC(nibName: "LoginVC", bundle: nil)
             self.presentViewController(newViewController, animated: true, completion: nil)
             userDefaults.synchronize()
-        } else if userDefaults.boolForKey("logged"){
+        } else if userDefaults.boolForKey("logged") {
             print("User already registered Appeared!")
             // imagePath = userDefaults.objectForKey("imagePath") as! String
             // print(imagePath)

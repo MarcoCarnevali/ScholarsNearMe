@@ -24,6 +24,7 @@
 		A3099C5D1CE3658D008B6923 /* EffectsAndLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3099C5C1CE3658D008B6923 /* EffectsAndLayout.swift */; };
 		A3FCC3EF1CE51F9900974E7F /* Scholar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCC3EE1CE51F9900974E7F /* Scholar.swift */; };
 		A3FCC3F71CE51FB100974E7F /* ScholarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCC3F61CE51FB100974E7F /* ScholarCell.swift */; };
+		A3FCC3F91CE5A69400974E7F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCC3F81CE5A69400974E7F /* ProfileView.swift */; };
 		CF3055801CDEC6CB0059CE75 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30557E1CDEC6CB0059CE75 /* LoginVC.swift */; };
 		CF3055811CDEC6CB0059CE75 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF30557F1CDEC6CB0059CE75 /* LoginVC.xib */; };
 		FB0B5EB81CDE8AAE00993F49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0B5EB71CDE8AAE00993F49 /* AppDelegate.swift */; };
@@ -140,6 +141,7 @@
 		A3099C5C1CE3658D008B6923 /* EffectsAndLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsAndLayout.swift; sourceTree = "<group>"; };
 		A3FCC3EE1CE51F9900974E7F /* Scholar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scholar.swift; sourceTree = "<group>"; };
 		A3FCC3F61CE51FB100974E7F /* ScholarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScholarCell.swift; sourceTree = "<group>"; };
+		A3FCC3F81CE5A69400974E7F /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CF30557E1CDEC6CB0059CE75 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		CF30557F1CDEC6CB0059CE75 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
 		FB0B5EB41CDE8AAE00993F49 /* scholarsNearMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scholarsNearMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +204,7 @@
 			children = (
 				CF30557E1CDEC6CB0059CE75 /* LoginVC.swift */,
 				FB0B5EB91CDE8AAE00993F49 /* MainScreen.swift */,
+				A3FCC3F81CE5A69400974E7F /* ProfileView.swift */,
 				A3099C5C1CE3658D008B6923 /* EffectsAndLayout.swift */,
 				1271E1D61CDE8E92007C5176 /* DualScreenVC.swift */,
 				12E299671CDF4FBE00510861 /* AnimatedProfile.swift */,
@@ -499,6 +502,7 @@
 				5CE292361CE2705000E45D30 /* MozMaterialDesignSpinner.swift in Sources */,
 				FB0B5EC01CDE8AAE00993F49 /* scholarsNearMe.xcdatamodeld in Sources */,
 				9F6A58511CDE945000AF3F1E /* Constants.swift in Sources */,
+				A3FCC3F91CE5A69400974E7F /* ProfileView.swift in Sources */,
 				5CE292351CE2705000E45D30 /* DeformationButton.swift in Sources */,
 				12E2996A1CDF58B000510861 /* DataService.swift in Sources */,
 			);
